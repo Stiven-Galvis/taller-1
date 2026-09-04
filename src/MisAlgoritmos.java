@@ -1,12 +1,12 @@
-public class MisAlgoritmos implements Busquedas, Ordenamientos{
+public class MisAlgoritmos implements Busquedas, Ordenamientos {
     @Override
     public int linearSearch(int[] arrayPorExplorar, int elementoABuscar) {
-        int tamañolista = arrayPorExplorar.length-1;
+        int tamañolista = arrayPorExplorar.length - 1;
         for (int i = 0; i < tamañolista; i++) {
-           int elementoActual = arrayPorExplorar[i];
-           if(elementoActual == elementoABuscar){
-               return i;
-           }
+            int elementoActual = arrayPorExplorar[i];
+            if (elementoActual == elementoABuscar) {
+                return i;
+            }
         }
         return -1;
     }
@@ -25,29 +25,49 @@ public class MisAlgoritmos implements Busquedas, Ordenamientos{
             }
         }
 
-        @Override
-        public int[] bubbleSort(int[] arrayDesordenado) {
-            for (int i = 0; i < arrayDesordenado.length - 1; i++)
-            {
-                for (int i = 0; i < arrayDesordenado.length - 1 - i; i++) {
-                    if (arrayDesordenado[i] > arrayDesordenado[i + 1]) {
-                        int temporal = arrayDesordenado[i];
-                        arrayDesordenado[i] = arrayDesordenado[i + 1];
-                        arrayDesordenado[i + 1] = temporal;
-                    }
+
+    }
+
+    @Override
+    public int[] bubbleSort(int[] arrayDesordenado) {
+        for (int i = 0; i < arrayDesordenado.length - 1; i++) {
+            for (int i = 0; i < arrayDesordenado.length - 1 - i; i++) {
+                if (arrayDesordenado[i] > arrayDesordenado[i + 1]) {
+                    int temporal = arrayDesordenado[i];
+                    arrayDesordenado[i] = arrayDesordenado[i + 1];
+                    arrayDesordenado[i + 1] = temporal;
                 }
             }
+        }
+        return arrayDesordenado;
+
+    }
+
+    @Override
+    public int[] selectionSort(int[] arrayDesordenado) {
+        if (arrayDesordenado == null){
+            return null ;
+        }
+        int n = arrayDesordenado.length ;
+        for (int i = 0 ; i < n-1 ; i ++) {
+            int indiceMinimo = 1 ;
+
+            for (int j = i+1 ; j<n ; j++) {
+                if (arrayDesordenado[j] < arrayDesordenado[indiceMinimo]) {
+                    indiceMinimo = j ;
+                }
+            }
+
+            int temporal = arrayDesordenado[indiceMinimo] ;
+            arrayDesordenado[indiceMinimo] = arrayDesordenado[i] ;
+            arrayDesordenado[i] = temporal ;
         }
         return arrayDesordenado;
     }
 
     @Override
-    public int[] selectionSort(int[] arrayDesordenado) {
-        return new int[0];
-    }
-
-    @Override
     public int[] insertionSort(int[] arrayDesordenado) {
+
         return new int[0];
     }
 
