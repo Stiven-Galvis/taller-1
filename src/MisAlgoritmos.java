@@ -97,12 +97,70 @@ public class MisAlgoritmos implements Busquedas, Ordenamientos {
         int[] derecha = new int [arrayDesordenado.length - mitad] ;
 
         System.arraycopy(arrayDesordenado, 0, izquierda, 0, mitad) ;
-        System.arraycopy(arrayDesordenado, mitad, derecha, 0, arrayDesordenado,
-        return new int[0] ;
+        System.arraycopy(arrayDesordenado, mitad, derecha, 0, arrayDesordenado.length - mitad) ;
+        izquierda = mergeSort(izquierda);
+        derecha = mergeSort(derecha);
+
+        return merge(izquierda, derecha);
+    }
+
+    private int[] merge(int[] izq, int[] der) {
+        int[] resultado = new int[izq.length + der.length];
+        int i = 0, j = 0, k = 0;
+
+        while (i < izq.length && j < der.length) {
+            if (izq[i] <= der[j]) {
+                resultado[k++] = izq[i++];
+            } else {
+                resultado[k++] = der[j++];
+            }
+        }
+
+        while (i < izq.length) {
+            resultado[k++] = izq[i++];
+        }
+
+        while (j < der.length) {
+            resultado[k++] = der[j++];
+        }
+        return resultado ;
     }
 
     @Override
     public int[] quickSort(int[] arrayDesordenado) {
-        return new int[0];
+        if (arrayDesordenado == null || arrayDesordenado.length <= 1) {
+            return arrayDesordenado;
+        }
+
+        quickSortRecursivo(arrayDesordenado, 0, arrayDesordenado.length - 1);
+        return arrayDesordenado;
+    }
+
+    private void quickSortRecursivo(int[] arr, int inicio, int fin) {
+        if (inicio < fin) {
+            int indicePivote = partition(arr, inicio, fin);
+            quickSortRecursivo(arr, inicio, indicePivote - 1);
+            quickSortRecursivo(arr, indicePivote + 1, fin);
+        }
+    }
+
+    private int partition(int[] arr, int inicio, int fin) {
+        int pivote = arr[fin];
+        int i = inicio - 1;
+
+        for (int j = inicio; j < fin; j++) {
+            if (arr[j] <= pivote) {
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[fin];
+        arr[fin] = temp;
+
+        return i + 1;
     }
 }
