@@ -28,7 +28,7 @@ public class MisAlgoritmos implements Busquedas, Ordenamientos {
             }
         }
 
-        return -1; 
+        return -1;
     }
 
     @Override
